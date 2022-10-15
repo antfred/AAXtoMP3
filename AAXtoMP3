@@ -698,7 +698,7 @@ do
     currentDirNameScheme="$(eval echo "${dirNameScheme}")"
   else
     # The Default
-    currentDirNameScheme="${genre}/${artist}/${title}"
+    currentDirNameScheme="${genre}/${artist}/${title//[\<\>\:\"\\\/\|\?\*]/\.}"
   fi
 
   # If we defined a target directory, use it. Otherwise use the location of the AAX file
@@ -713,7 +713,7 @@ do
     currentFileNameScheme="$(eval echo "${fileNameScheme}")"
   else
     # The Default
-    currentFileNameScheme="${title}"
+    currentFileNameScheme="${title//[\<\>\:\"\\\/\|\?\*]/\.}"
   fi
   output_file="${output_directory}/${currentFileNameScheme}.${extension}"
 
@@ -874,7 +874,7 @@ do
           chapter_title="$(eval echo "${chapterNameScheme}")"
         else
           # The Default
-          chapter_title="${title}-$(printf %0${#chaptercount}d $chapternum) ${chapter}"
+          chapter_title="${title//[\<\>\:\"\\\/\|\?\*]/\.}-$(printf %0${#chaptercount}d $chapternum) ${chapter//[\<\>\:\"\\\/\|\?\*]/\.}"
         fi
         chapter_file="${output_directory}/${chapter_title}.${extension}"
 
